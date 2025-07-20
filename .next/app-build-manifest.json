@@ -11,10 +11,10 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/getting-started/quick-start/page": [
+    "/not-found": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/getting-started/quick-start/page.js"
+      "static/chunks/app/not-found.js"
     ]
   }
 }

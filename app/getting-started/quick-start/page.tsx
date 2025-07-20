@@ -1,7 +1,9 @@
 'use client'
 
+import Link from 'next/link'
 import { CopyButton } from '../../components/copy-button'
 import { Breadcrumbs } from '../../components/breadcrumbs'
+import { EditPageLink } from '../../components/edit-page-link'
 
 export default function QuickStartPage() {
   return (
@@ -10,7 +12,7 @@ export default function QuickStartPage() {
         <Breadcrumbs />
         
         <div className="animate-fade-in">
-          <h1 className="text-5xl font-bold text-primary mb-6">
+          <h1 id="quick-start-guide" className="text-5xl font-bold text-primary mb-6">
             Quick Start Guide
           </h1>
           <p className="text-xl text-secondary mb-12 leading-relaxed">
@@ -20,7 +22,7 @@ export default function QuickStartPage() {
           <div className="space-y-16">
             {/* Prerequisites Section */}
             <section className="animate-slide-in-left">
-              <h2 className="text-3xl font-bold text-primary mb-6 flex items-center">
+              <h2 id="prerequisites" className="text-3xl font-bold text-primary mb-6 flex items-center">
                 Prerequisites
               </h2>
               <p className="text-lg text-secondary mb-8">
@@ -29,7 +31,7 @@ export default function QuickStartPage() {
 
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="surface-elevation-1 rounded-2xl p-8 border border-custom">
-                  <h3 className="text-2xl font-semibold text-primary mb-6">
+                  <h3 id="required-software" className="text-2xl font-semibold text-primary mb-6">
                     Required Software
                   </h3>
                   <ul className="space-y-4">
@@ -60,7 +62,7 @@ export default function QuickStartPage() {
                 </div>
 
                 <div className="surface-elevation-1 rounded-2xl p-8 border border-custom">
-                  <h3 className="text-2xl font-semibold text-primary mb-6">
+                  <h3 id="system-requirements" className="text-2xl font-semibold text-primary mb-6">
                     System Requirements
                   </h3>
                   <ul className="space-y-4">
@@ -85,7 +87,7 @@ export default function QuickStartPage() {
 
             {/* FFmpeg Installation */}
             <section className="animate-slide-in-right">
-              <h3 className="text-2xl font-semibold text-primary mb-6">
+              <h3 id="install-ffmpeg" className="text-2xl font-semibold text-primary mb-6">
                 Install FFmpeg
               </h3>
               <div className="surface-elevation-2 rounded-2xl overflow-hidden">
@@ -117,7 +119,7 @@ sudo apt install nvidia-cuda-toolkit`} />
 
             {/* Step 1 */}
             <section className="animate-slide-in-left">
-              <h2 className="text-3xl font-bold text-primary mb-6 flex items-center">
+              <h2 id="clone-repositories" className="text-3xl font-bold text-primary mb-6 flex items-center">
                 <span className="w-10 h-10 bg-gradient-to-r from-vimm-orange to-vimm-orange-dark text-white rounded-full flex items-center justify-center text-lg font-bold mr-4">1</span>
                 Clone the Repositories
               </h2>
@@ -157,7 +159,7 @@ git clone https://github.com/VIMM-TV/vimm-chat.git`} />
 
             {/* Step 2 */}
             <section className="animate-slide-in-right">
-              <h2 className="text-3xl font-bold text-primary mb-6 flex items-center">
+              <h2 id="environment-variables" className="text-3xl font-bold text-primary mb-6 flex items-center">
                 <span className="w-10 h-10 bg-gradient-to-r from-vimm-orange to-vimm-orange-dark text-white rounded-full flex items-center justify-center text-lg font-bold mr-4">2</span>
                 Configure Environment Variables
               </h2>
@@ -167,7 +169,7 @@ git clone https://github.com/VIMM-TV/vimm-chat.git`} />
               
               <div className="grid gap-8">
                 <div className="surface-elevation-1 rounded-2xl p-8 border border-custom">
-                  <h3 className="text-xl font-semibold text-primary mb-4">VIMM Core (.env)</h3>
+                  <h3 id="vimm-core-env" className="text-xl font-semibold text-primary mb-4">VIMM Core (.env)</h3>
                   <div className="surface-elevation-2 rounded-xl overflow-hidden">
                     <div className="relative group">
                       <pre>
@@ -215,7 +217,7 @@ POSTING_KEY=your_posting_key`} />
                 </div>
 
                 <div className="surface-elevation-1 rounded-2xl p-8 border border-custom">
-                  <h3 className="text-xl font-semibold text-primary mb-4">VIMM Frontend (.env)</h3>
+                  <h3 id="vimm-frontend-env" className="text-xl font-semibold text-primary mb-4">VIMM Frontend (.env)</h3>
                   <div className="surface-elevation-2 rounded-xl overflow-hidden">
                     <div className="relative group">
                       <pre>
@@ -240,8 +242,8 @@ REACT_APP_HIVE_NODE=https://api.hive.blog`} />
               </div>
             </section>
 
-            {/* Continue button */}
-            <div className="text-center surface-elevation-2 rounded-3xl p-8 animate-fade-in">
+            {/* Next Steps */}
+            <section id="next-steps" className="text-center surface-elevation-2 rounded-3xl p-8 animate-fade-in">
               <h3 className="text-2xl font-bold text-primary mb-4">
                 Ready for the next steps?
               </h3>
@@ -249,15 +251,23 @@ REACT_APP_HIVE_NODE=https://api.hive.blog`} />
                 Continue with installation and deployment configuration
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="btn-primary text-lg px-8 py-4">
+                <Link
+                  href="/getting-started/installation"
+                  className="btn-primary text-lg px-8 py-4"
+                >
                   Continue Setup
-                </button>
-                <button className="btn-secondary text-lg px-8 py-4">
+                </Link>
+                <Link
+                  href="/guides"
+                  className="btn-secondary text-lg px-8 py-4"
+                >
                   View Full Documentation
-                </button>
+                </Link>
               </div>
-            </div>
+            </section>
           </div>
+
+          <EditPageLink />
         </div>
       </div>
     </div>

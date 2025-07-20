@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, Server, Globe, MessageCircle, Star, Zap, Shield, Users } from 'lucide-react'
 import { Breadcrumbs } from './components/breadcrumbs'
+import { EditPageLink } from './components/edit-page-link'
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
         
         {/* Hero Section */}
         <div className="text-center mb-20 animate-fade-in">
-          <h1 className="text-6xl md:text-7xl font-bold text-primary mb-8 leading-tight">
+          <h1 id="vimm-framework-documentation" className="text-6xl md:text-7xl font-bold text-primary mb-8 leading-tight">
             VIMM Framework
             <span className="block bg-gradient-to-r from-vimm-orange to-vimm-orange-dark bg-clip-text text-transparent">
               Documentation
@@ -58,57 +59,62 @@ export default function Home() {
         </div>
 
         {/* Components Overview */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
-          {[
-            {
-              icon: Server,
-              title: 'VIMM Core',
-              description: 'High-performance streaming server with multi-protocol support (RTMP, WebRTC, HLS) and Hive blockchain integration.',
-              href: '/components/core',
-              color: 'from-blue-500 to-blue-600'
-            },
-            {
-              icon: Globe,
-              title: 'VIMM Frontend',
-              description: 'React-based reference frontend application with responsive design, stream viewing, and user management features.',
-              href: '/components/frontend',
-              color: 'from-green-500 to-green-600'
-            },
-            {
-              icon: MessageCircle,
-              title: 'VIMM Chat',
-              description: 'Real-time chat server with WebSocket support, moderation tools, and seamless integration with streaming components.',
-              href: '/components/chat',
-              color: 'from-purple-500 to-purple-600'
-            }
-          ].map((component, index) => (
-            <div key={index} className="group animate-slide-in-left" style={{ animationDelay: `${index * 200}ms` }}>
-              <div className="surface-elevation-1 hover:surface-elevation-3 p-8 rounded-2xl border border-custom transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg h-full">
-                <div className={`w-16 h-16 bg-gradient-to-r ${component.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <component.icon className="w-8 h-8 text-white" />
+        <section id="components-overview">
+          <h2 id="core-components" className="text-4xl font-bold text-primary mb-12 text-center">
+            Core Components
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8 mb-20">
+            {[
+              {
+                icon: Server,
+                title: 'VIMM Core',
+                description: 'High-performance streaming server with multi-protocol support (RTMP, WebRTC, HLS) and Hive blockchain integration.',
+                href: '/components/core',
+                color: 'from-blue-500 to-blue-600'
+              },
+              {
+                icon: Globe,
+                title: 'VIMM Frontend',
+                description: 'React-based reference frontend application with responsive design, stream viewing, and user management features.',
+                href: '/components/frontend',
+                color: 'from-green-500 to-green-600'
+              },
+              {
+                icon: MessageCircle,
+                title: 'VIMM Chat',
+                description: 'Real-time chat server with WebSocket support, moderation tools, and seamless integration with streaming components.',
+                href: '/components/chat',
+                color: 'from-purple-500 to-purple-600'
+              }
+            ].map((component, index) => (
+              <div key={index} className="group animate-slide-in-left" style={{ animationDelay: `${index * 200}ms` }}>
+                <div className="surface-elevation-1 hover:surface-elevation-3 p-8 rounded-2xl border border-custom transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg h-full">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${component.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <component.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-semibold text-primary mb-4 group-hover:text-vimm-orange transition-colors duration-300">
+                    {component.title}
+                  </h3>
+                  <p className="text-secondary mb-6 leading-relaxed">
+                    {component.description}
+                  </p>
+                  <Link
+                    href={component.href}
+                    className="link-primary font-semibold inline-flex items-center"
+                  >
+                    Learn more
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                  </Link>
                 </div>
-                <h3 className="text-2xl font-semibold text-primary mb-4 group-hover:text-vimm-orange transition-colors duration-300">
-                  {component.title}
-                </h3>
-                <p className="text-secondary mb-6 leading-relaxed">
-                  {component.description}
-                </p>
-                <Link
-                  href={component.href}
-                  className="link-primary font-semibold inline-flex items-center"
-                >
-                  Learn more
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                </Link>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </section>
 
         {/* Quick Start Section */}
-        <div className="surface-elevation-2 rounded-3xl p-10 mb-20 animate-fade-in">
+        <section id="quick-start-overview" className="surface-elevation-2 rounded-3xl p-10 mb-20 animate-fade-in">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold text-primary mb-6 text-center">
+            <h2 id="quick-start" className="text-4xl font-bold text-primary mb-6 text-center">
               Quick Start
             </h2>
             <p className="text-xl text-secondary mb-8 text-center">
@@ -116,7 +122,7 @@ export default function Home() {
             </p>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-6">
-                <h3 className="text-2xl font-semibold text-primary mb-4">
+                <h3 id="prerequisites-overview" className="text-2xl font-semibold text-primary mb-4">
                   Prerequisites
                 </h3>
                 <ul className="space-y-3">
@@ -134,7 +140,7 @@ export default function Home() {
                 </ul>
               </div>
               <div className="space-y-6">
-                <h3 className="text-2xl font-semibold text-primary mb-4">
+                <h3 id="installation-overview" className="text-2xl font-semibold text-primary mb-4">
                   Installation
                 </h3>
                 <ul className="space-y-3">
@@ -164,11 +170,11 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Features Section */}
-        <div className="mb-20 animate-fade-in">
-          <h2 className="text-4xl font-bold text-primary mb-12 text-center">
+        <section id="key-features" className="mb-20 animate-fade-in">
+          <h2 id="features" className="text-4xl font-bold text-primary mb-12 text-center">
             Key Features
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -188,11 +194,11 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Call to Action */}
-        <div className="text-center surface-elevation-2 rounded-3xl p-10 animate-fade-in">
-          <h2 className="text-3xl font-bold text-primary mb-4">
+        <section id="get-started-cta" className="text-center surface-elevation-2 rounded-3xl p-10 animate-fade-in">
+          <h2 id="ready-to-start" className="text-3xl font-bold text-primary mb-4">
             Ready to get started?
           </h2>
           <p className="text-xl text-secondary mb-8 max-w-2xl mx-auto">
@@ -213,7 +219,9 @@ export default function Home() {
               Get Help
             </Link>
           </div>
-        </div>
+        </section>
+
+        <EditPageLink />
       </div>
     </div>
   )
