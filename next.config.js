@@ -9,9 +9,7 @@ const withMDX = require('@next/mdx')({
 
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
-  experimental: {
-    mdxRs: true,
-  },
+  // Remove experimental mdxRs as it's not stable with Next.js 14
 }
 
 module.exports = withMDX(nextConfig)
