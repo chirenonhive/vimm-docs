@@ -4,6 +4,9 @@ const withMDX = require('@next/mdx')({
   options: {
     remarkPlugins: [],
     rehypePlugins: [],
+    // Add this to fix the React context issue
+    providerImportSource: "@mdx-js/react",
+    development: process.env.NODE_ENV === 'development'
   },
 })
 
@@ -13,6 +16,10 @@ const nextConfig = {
   trailingSlash: false,
   images: {
     unoptimized: true
+  },
+  // Disable the new MDX compiler that's causing issues
+  experimental: {
+    mdxRs: false
   }
 }
 
