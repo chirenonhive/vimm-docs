@@ -1,0 +1,286 @@
+# Quick Start Guide
+
+Get your VIMM framework up and running in under 30 minutes with this comprehensive guide.
+
+## Prerequisites
+
+Before starting, ensure you have the following installed:
+
+### Required Software
+- **Node.js 18+** - [Download here](https://nodejs.org/)
+- **npm** or **yarn** package manager
+- **Git** for cloning repositories
+- **FFmpeg** for media processing
+
+### System Requirements
+- **Memory**: Minimum 4GB RAM (8GB+ recommended for production)
+- **Storage**: 10GB+ free space
+- **Network**: Stable internet connection
+- **OS**: Linux (Ubuntu 20.04+), macOS, or Windows with WSL2
+
+### Install FFmpeg
+
+```bash
+# Ubuntu/Debian
+sudo apt update
+sudo apt install ffmpeg
+
+# macOS (with Homebrew)
+brew install ffmpeg
+
+# For NVIDIA GPU support (Ubuntu)
+sudo apt install nvidia-cuda-toolkit
+```
+
+## Step 1: Clone the Repositories
+
+Create a directory for your VIMM deployment and clone all three components:
+
+```bash
+mkdir vimm-deployment
+cd vimm-deployment
+
+# Clone VIMM Core (streaming server)
+git clone https://github.com/VIMM-TV/vimm-core.git
+
+# Clone VIMM Frontend (web interface)
+git clone https://github.com/VIMM-TV/vimm-frontend.git
+
+# Clone VIMM Chat (chat server)
+git clone https://github.com/VIMM-TV/vimm-chat.git
+```
+
+## Step 2: Setup VIMM Core
+
+The core streaming server is the foundation of your VIMM deployment.
+
+```bash
+cd vimm-core
+
+# Install dependencies
+npm install
+
+# Initialize the database
+node scripts/init-db.js
+
+# Create media directories
+mkdir -p media/live media/thumbnails
+
+# Create environment file
+cp .env.example .env
+```
+
+### Configure VIMM Core Environment
+
+Edit the `.env` file with your configuration:
+
+```bash
+# Database Configuration
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=vimm_core
+DB_USER=vimm
+DB_PASS=your_secure_password
+
+# Server Configuration
+HTTP_PORT=3001
+HTTPS_PORT=3443
+RTMP_PORT=1935
+
+# SSL Certificates (for production)
+SSL_CERT_PATH=/path/to/cert.pem
+SSL_KEY_PATH=/path/to/key.pem
+
+# Hive Blockchain Integration
+HIVE_POSTING_KEY=your_hive_posting_key_here
+
+# Security
+JWT_SECRET=your_jwt_secret_here
+```
+
+### Start VIMM Core
+
+```bash
+# Development mode
+npm run dev
+
+# Production mode
+npm start
+```
+
+The core server will be available at:
+- HTTP: `http://localhost:3001`
+- HTTPS: `https://localhost:3443`
+- RTMP: `rtmp://localhost:1935`
+
+## Step 3: Setup VIMM Frontend
+
+```bash
+cd ../vimm-frontend
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env.local
+```
+
+### Configure Frontend Environment
+
+Edit `.env.local`:
+
+```bash
+# Point to your VIMM Core server
+REACT_APP_VIMM_CORE_SERVER=https://localhost:3443
+
+# Point to your VIMM Chat server
+REACT_APP_VIMM_CHAT_SERVER=https://localhost:4443
+```
+
+### Build and Start Frontend
+
+```bash
+# Development mode
+npm start
+
+# Production build
+npm run build
+npm install -g serve
+serve -s build -l 3000
+```
+
+Frontend will be available at: `http://localhost:3000`
+
+## Step 4: Setup VIMM Chat
+
+```bash
+cd ../vimm-chat
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env
+```
+
+### Configure Chat Environment
+
+```bash
+# Chat Server Configuration
+PORT=4443
+HTTPS_PORT=4443
+
+# CORS Configuration
+CORS_ORIGIN=https://localhost:3000,https://localhost:3443
+
+# WebSocket Configuration
+WS_PORT=4443
+
+# SSL Configuration
+SSL_CERT_PATH=/path/to/cert.pem
+SSL_KEY_PATH=/path/to/key.pem
+```
+
+### Start Chat Server
+
+```bash
+# Development mode
+npm run dev
+
+# Production mode
+npm start
+```
+
+Chat server will be available at: `https://localhost:4443`
+
+## Step 5: Verify Installation
+
+### Check Core Server Health
+
+```bash
+curl http://localhost:3001/health
+```
+
+Expected response:
+```json
+{
+  "status": "ok",
+  "timestamp": "2025-01-20T17:52:28.000Z"
+}
+```
+
+### Test RTMP Stream
+
+You can test streaming with OBS or ffmpeg:
+
+```bash
+# Test stream with ffmpeg
+ffmpeg -re -i test-video.mp4 -c copy -f flv rtmp://localhost:1935/live/YOUR_STREAM_KEY
+```
+
+### Access Frontend
+
+1. Open `http://localhost:3000` in your browser
+2. You should see the VIMM homepage
+3. Check that streams are loading (may show demo data initially)
+
+## Step 6: Create Your First Stream
+
+1. **Get a Hive Account**: You'll need a Hive blockchain account for authentication
+2. **Generate Stream Key**: Use the VIMM Core API or frontend to generate a stream key
+3. **Configure OBS**:
+   - Server: `rtmp://localhost:1935/live`
+   - Stream Key: Your generated stream key
+4. **Start Streaming**: Click "Start Streaming" in OBS
+5. **View Stream**: Go to `http://localhost:3000` to see your live stream
+
+## Next Steps
+
+Congratulations! You now have a working VIMM deployment. Here's what to do next:
+
+- **[Production Setup](/deployment/production)** - Configure SSL, domains, and security
+- **[Environment Configuration](/configuration/environment)** - Detailed configuration options
+- **[Troubleshooting](/guides/troubleshooting)** - Common issues and solutions
+
+## Common Issues
+
+### Port Conflicts
+If you get port conflict errors, change the ports in your `.env` files:
+
+```bash
+# VIMM Core
+HTTP_PORT=3002
+HTTPS_PORT=3444
+
+# VIMM Frontend
+PORT=3001
+
+# VIMM Chat
+PORT=4444
+```
+
+### FFmpeg Not Found
+Ensure FFmpeg is installed and in your PATH:
+
+```bash
+ffmpeg -version
+```
+
+### SSL Certificate Errors
+For development, you can disable HTTPS or use self-signed certificates. For production, use Let's Encrypt or commercial certificates.
+
+### Database Connection Issues
+Ensure your database is running and credentials are correct in the `.env` file.
+
+## Support
+
+If you encounter issues:
+
+1. Check the [Troubleshooting Guide](/guides/troubleshooting)
+2. Review logs in each component's console output
+3. Open an issue on the relevant GitHub repository
+4. Join the VIMM community for support
+
+---
+
+**Next**: Learn about [Production Deployment](/deployment/production) for going live with your VIMM platform.
