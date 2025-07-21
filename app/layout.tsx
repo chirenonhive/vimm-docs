@@ -7,6 +7,7 @@ import { Sidebar } from './components/sidebar'
 import { Footer } from './components/footer'
 import { Breadcrumb } from './components/breadcrumb'
 import { TableOfContents } from './components/table-of-contents'
+import { ReadingProgress } from './components/reading-progress'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -44,6 +45,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} bg-white dark:bg-gray-900`}>
         <ThemeProvider>
+          <ReadingProgress />
           <div className="min-h-screen flex flex-col">
             <Navigation />
             <div className="flex flex-1">
