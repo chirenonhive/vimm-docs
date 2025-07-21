@@ -35,33 +35,37 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans bg-white dark:bg-gray-900`}>
         <ThemeProvider>
-          <div className="min-h-screen flex flex-col">
-            <Navigation />
-            <div className="flex flex-1">
+          <div className="documentation-layout">
+            {/* Fixed Header */}
+            <header className="documentation-header">
+              <Navigation />
+            </header>
+            
+            {/* Fixed Sidebar */}
+            <aside className="documentation-sidebar">
               <Sidebar />
-              <main className="flex-1 min-w-0">
-                <div className="max-w-none mx-auto">
-                  <div className="flex">
-                    {/* Main content area */}
-                    <div className="flex-1 min-w-0 px-6 py-8 lg:px-8">
-                      <Breadcrumb />
-                      <div className="max-w-4xl">
-                        {children}
-                        <EditOnGitHub className="mt-12" />
-                        <PageNavigation className="mt-8" />
-                      </div>
-                    </div>
-                    
-                    {/* Table of Contents - Right sidebar */}
-                    <div className="hidden xl:block w-64 flex-shrink-0">
-                      <div className="px-6 py-8">
-                        <TableOfContents />
-                      </div>
-                    </div>
+            </aside>
+            
+            {/* Main Content Area */}
+            <main className="documentation-main">
+              <div className="main-content-wrapper">
+                <div className="main-content-container">
+                  <Breadcrumb />
+                  <div className="prose-content">
+                    {children}
+                    <EditOnGitHub className="mt-12" />
+                    <PageNavigation className="mt-8" />
                   </div>
                 </div>
-              </main>
-            </div>
+              </div>
+            </main>
+            
+            {/* Table of Contents - Right sidebar */}
+            <aside className="documentation-toc">
+              <div className="toc-content">
+                <TableOfContents />
+              </div>
+            </aside>
           </div>
         </ThemeProvider>
       </body>

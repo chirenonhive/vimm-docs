@@ -11,9 +11,9 @@ export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <nav className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+    <nav className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm h-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-to-br from-vimm-orange to-orange-600 rounded-lg flex items-center justify-center shadow-sm">
@@ -59,7 +59,7 @@ export function Navigation() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+        <div className="md:hidden bg-white dark:bg-gray-900 absolute top-full left-0 right-0 z-50 shadow-lg">
           <div className="px-4 pt-4 pb-3 space-y-3">
             {/* Search - Mobile */}
             <div className="mb-4">

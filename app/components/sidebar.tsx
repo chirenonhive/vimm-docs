@@ -67,7 +67,7 @@ export function Sidebar() {
   }
 
   return (
-    <div className="w-72 bg-gray-50/50 dark:bg-gray-800/50 border-r border-gray-200 dark:border-gray-700 min-h-screen overflow-y-auto">
+    <div className="h-full overflow-y-auto">
       <div className="p-6">
         <nav className="space-y-6">
           {navigation.map((section) => (
