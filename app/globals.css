@@ -183,3 +183,104 @@ mark {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* Documentation Layout Structure */
+.documentation-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 240px;
+  grid-template-rows: 64px 1fr;
+  grid-template-areas: 
+    "header header header"
+    "sidebar main toc";
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Fixed Header */
+.documentation-header {
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid;
+  @apply border-gray-200 dark:border-gray-700;
+}
+
+/* Fixed Sidebar */
+.documentation-sidebar {
+  grid-area: sidebar;
+  overflow-y: auto;
+  @apply bg-gray-50/50 dark:bg-gray-800/50 border-r border-gray-200 dark:border-gray-700;
+}
+
+/* Main Content Area */
+.documentation-main {
+  grid-area: main;
+  overflow-y: auto;
+  position: relative;
+}
+
+.main-content-wrapper {
+  min-height: 100%;
+  @apply px-6 py-8 lg:px-8;
+}
+
+.main-content-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.prose-content {
+  @apply prose prose-lg dark:prose-invert max-w-none;
+  line-height: 1.7;
+}
+
+/* Table of Contents */
+.documentation-toc {
+  grid-area: toc;
+  overflow-y: auto;
+  @apply border-l border-gray-200 dark:border-gray-700;
+}
+
+.toc-content {
+  @apply px-6 py-8;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1279px) {
+  .documentation-layout {
+    grid-template-columns: 280px 1fr;
+    grid-template-areas: 
+      "header header"
+      "sidebar main";
+  }
+  
+  .documentation-toc {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .documentation-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "header"
+      "main";
+  }
+  
+  .documentation-sidebar {
+    display: none;
+  }
+  
+  /* Mobile sidebar overlay (when needed) */
+  .documentation-sidebar.mobile-open {
+    display: block;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 280px;
+    height: calc(100vh - 64px);
+    z-index: 40;
+    @apply bg-white dark:bg-gray-900 shadow-xl;
+  }
+}
