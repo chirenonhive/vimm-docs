@@ -1,11 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from './components/theme-provider'
 import { Navigation } from './components/navigation'
 import { Sidebar } from './components/sidebar'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'VIMM Framework Documentation',
@@ -20,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} bg-white dark:bg-gray-900`}>
+      <body className={`font-sans bg-white dark:bg-gray-900`}>
         <ThemeProvider>
           <div className="min-h-screen">
             <Navigation />
