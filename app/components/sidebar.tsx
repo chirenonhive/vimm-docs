@@ -13,7 +13,6 @@ const navigation = [
     items: [
       { title: 'Overview', href: '/', icon: 'fa fa-home' },
       { title: 'Quick Start', href: '/getting-started/quick-start', icon: 'fa fa-rocket' },
-      { title: 'System Requirements', href: '/getting-started/requirements', icon: 'fa fa-list-check' },
     ]
   },
   {
@@ -25,7 +24,7 @@ const navigation = [
       { title: 'VIMM Chat', href: '/components/chat', icon: 'fa fa-comments' },
     ]
   },
-  {
+  /* {
     title: 'Deployment',
     icon: 'fa fa-upload',
     items: [
@@ -34,7 +33,7 @@ const navigation = [
       { title: 'Docker', href: '/deployment/docker', icon: 'fab fa-docker' },
       { title: 'Production Setup', href: '/deployment/production', icon: 'fa fa-cogs' },
     ]
-  },
+  }, */
   {
     title: 'Configuration',
     icon: 'fa fa-cog',
@@ -62,7 +61,7 @@ export default function Sidebar() {
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
     'Getting Started': true,
     'Core Components': false,
-    'Deployment': false,
+    //'Deployment': false,
     'Configuration': false,
     'Guides & Help': false,
   });

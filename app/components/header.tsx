@@ -3,11 +3,28 @@
 import { useAppSettings } from '../config/app-settings';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
+import { useHivePosts } from '../hooks/useHivePosts';
 
 export default function Header() {
   const { settings, updateSettings } = useAppSettings();
   const { theme, setTheme } = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
+  const { posts: hivePosts, loading: postsLoading, error: postsError } = useHivePosts('chiren', 'development', 5);
+
+  const formatTimeAgo = (dateString: string) => {
+    const now = new Date();
+    const postDate = new Date(dateString);
+    const diffInHours = Math.floor((now.getTime() - postDate.getTime()) / (1000 * 60 * 60));
+    
+    if (diffInHours < 1) {
+      return 'Just now';
+    } else if (diffInHours < 24) {
+      return `${diffInHours} hour${diffInHours === 1 ? '' : 's'} ago`;
+    } else {
+      const diffInDays = Math.floor(diffInHours / 24);
+      return `${diffInDays} day${diffInDays === 1 ? '' : 's'} ago`;
+    }
+  };
 
   const toggleSidebarMobile = () => {
     updateSettings({
@@ -79,42 +96,59 @@ export default function Header() {
             role="button"
           >
             <i className="fa fa-bell"></i>
-            <span className="badge bg-danger rounded-pill">3</span>
+            <span className="badge bg-danger rounded-pill">{hivePosts.length}</span>
           </a>
           <div className="dropdown-menu media-list dropdown-menu-end" style={{ minWidth: '320px' }}>
-            <div className="dropdown-header">UPDATES (3)</div>
-            <a href="#" className="dropdown-item media">
-              <div className="media-left">
-                <i className="fa fa-code-branch media-object bg-blue text-white p-2 rounded"></i>
+            <div className="dropdown-header">DEVELOPMENT UPDATES ({hivePosts.length})</div>
+            
+            {postsLoading && (
+              <div className="dropdown-item text-center py-3">
+                <i className="fa fa-spinner fa-spin me-2"></i>
+                Loading updates...
               </div>
-              <div className="media-body ms-3">
-                <h6 className="media-heading mb-1">VIMM Core v2.1.0 Released</h6>
-                <p className="mb-1 text-muted small">New features and bug fixes available</p>
-                <div className="text-muted fs-11px">2 hours ago</div>
+            )}
+            
+            {postsError && (
+              <div className="dropdown-item text-center py-3 text-danger">
+                <i className="fa fa-exclamation-triangle me-2"></i>
+                Failed to load updates
               </div>
-            </a>
-            <a href="#" className="dropdown-item media">
-              <div className="media-left">
-                <i className="fa fa-book media-object bg-green text-white p-2 rounded"></i>
+            )}
+            
+            {!postsLoading && !postsError && hivePosts.length === 0 && (
+              <div className="dropdown-item text-center py-3 text-muted">
+                No development posts found
               </div>
-              <div className="media-body ms-3">
-                <h6 className="media-heading mb-1">Documentation Updated</h6>
-                <p className="mb-1 text-muted small">New deployment guides added</p>
-                <div className="text-muted fs-11px">1 day ago</div>
-              </div>
-            </a>
-            <a href="#" className="dropdown-item media">
-              <div className="media-left">
-                <i className="fa fa-server media-object bg-orange text-white p-2 rounded"></i>
-              </div>
-              <div className="media-body ms-3">
-                <h6 className="media-heading mb-1">Server Maintenance</h6>
-                <p className="mb-1 text-muted small">Scheduled maintenance completed</p>
-                <div className="text-muted fs-11px">3 days ago</div>
-              </div>
-            </a>
+            )}
+            
+            {!postsLoading && !postsError && hivePosts.map((post, index) => (
+              <a 
+                key={post.permlink} 
+                href={post.url} 
+                className="dropdown-item media"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="media-left">
+                  <i className="fa fa-code media-object bg-blue text-white p-2 rounded"></i>
+                </div>
+                <div className="media-body ms-3">
+                  <h6 className="media-heading mb-1">{post.title}</h6>
+                  <p className="mb-1 text-muted small">{post.description}</p>
+                  <div className="text-muted fs-11px">{formatTimeAgo(post.created)}</div>
+                </div>
+              </a>
+            ))}
+            
             <div className="dropdown-footer text-center">
-              <a href="#" className="text-decoration-none">View all updates</a>
+              <a 
+                href="https://peakd.com/@chiren" 
+                className="text-decoration-none"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View all posts by @chiren
+              </a>
             </div>
           </div>
         </div>
