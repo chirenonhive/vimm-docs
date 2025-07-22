@@ -1,156 +1,287 @@
 import Link from 'next/link'
-import { ArrowRight, Server, Globe, MessageCircle } from 'lucide-react'
 
 export default function Home() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12">
+    <div className="container-fluid">
+      {/* Breadcrumb */}
+      <nav aria-label="breadcrumb" className="mb-3">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item"><a href="#">Home</a></li>
+          <li className="breadcrumb-item active">Documentation</li>
+        </ol>
+      </nav>
+
+      {/* Page Header */}
+      <div className="row mb-4">
+        <div className="col-12">
+          <h1 className="page-header mb-2">
+            VIMM Framework Documentation
+            <small className="text-muted d-block">Complete guide to deploying and configuring the VIMM streaming framework</small>
+          </h1>
+        </div>
+      </div>
+
       {/* Hero Section */}
-      <div className="text-center mb-16">
-        <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-6">
-          VIMM Framework
-          <span className="block text-vimm-orange">Documentation</span>
-        </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-          Complete guide to deploying and configuring the VIMM decentralized streaming framework. 
-          Build your own streaming platform with Hive blockchain integration.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/getting-started/quick-start"
-            className="inline-flex items-center px-6 py-3 bg-vimm-orange text-white font-medium rounded-lg hover:bg-orange-600 transition-colors"
-          >
-            Get Started
-            <ArrowRight className="ml-2 w-4 h-4" />
-          </Link>
-          <Link
-            href="https://github.com/VIMM-TV"
-            className="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View on GitHub
-          </Link>
+      <div className="row mb-4">
+        <div className="col-12">
+          <div className="panel panel-inverse">
+            <div className="panel-body text-center py-5">
+              <div className="row justify-content-center">
+                <div className="col-lg-8">
+                  <h2 className="fw-bold mb-3">Welcome to VIMM Framework</h2>
+                  <p className="lead mb-4">
+                    Build your own decentralized streaming platform with Hive blockchain integration. 
+                    Get started with our comprehensive guides and deployment instructions.
+                  </p>
+                  <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                    <Link
+                      href="/getting-started/quick-start"
+                      className="btn btn-primary btn-lg px-4"
+                    >
+                      <i className="fa fa-rocket me-2"></i>
+                      Get Started
+                    </Link>
+                    <a
+                      href="https://github.com/VIMM-TV"
+                      className="btn btn-outline-secondary btn-lg px-4"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-github me-2"></i>
+                      View on GitHub
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Components Overview */}
-      <div className="grid md:grid-cols-3 gap-8 mb-16">
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-          <Server className="w-12 h-12 text-vimm-orange mb-4" />
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-            VIMM Core
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            High-performance streaming server with multi-protocol support (RTMP, WebRTC, HLS) 
-            and Hive blockchain integration.
-          </p>
-          <Link
-            href="/components/core"
-            className="text-vimm-orange hover:text-orange-600 font-medium"
-          >
-            Learn more →
-          </Link>
+      <div className="row mb-4">
+        <div className="col-md-4 mb-3">
+          <div className="panel h-100">
+            <div className="panel-body text-center">
+              <div className="text-primary mb-3">
+                <i className="fa fa-server fa-3x"></i>
+              </div>
+              <h5 className="panel-title mb-3">VIMM Core</h5>
+              <p className="text-muted mb-4">
+                High-performance streaming server with multi-protocol support (RTMP, WebRTC, HLS) 
+                and Hive blockchain integration.
+              </p>
+              <Link
+                href="/components/core"
+                className="btn btn-outline-primary"
+              >
+                Learn more <i className="fa fa-arrow-right ms-1"></i>
+              </Link>
+            </div>
+          </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-          <Globe className="w-12 h-12 text-vimm-orange mb-4" />
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-            VIMM Frontend
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            React-based reference frontend application with responsive design, 
-            stream viewing, and user management features.
-          </p>
-          <Link
-            href="/components/frontend"
-            className="text-vimm-orange hover:text-orange-600 font-medium"
-          >
-            Learn more →
-          </Link>
+        <div className="col-md-4 mb-3">
+          <div className="panel h-100">
+            <div className="panel-body text-center">
+              <div className="text-success mb-3">
+                <i className="fa fa-desktop fa-3x"></i>
+              </div>
+              <h5 className="panel-title mb-3">VIMM Frontend</h5>
+              <p className="text-muted mb-4">
+                React-based reference frontend application with responsive design, 
+                stream viewing, and user management features.
+              </p>
+              <Link
+                href="/components/frontend"
+                className="btn btn-outline-success"
+              >
+                Learn more <i className="fa fa-arrow-right ms-1"></i>
+              </Link>
+            </div>
+          </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-          <MessageCircle className="w-12 h-12 text-vimm-orange mb-4" />
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-            VIMM Chat
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Real-time chat server with WebSocket support, moderation tools, 
-            and seamless integration with streaming components.
-          </p>
-          <Link
-            href="/components/chat"
-            className="text-vimm-orange hover:text-orange-600 font-medium"
-          >
-            Learn more →
-          </Link>
+        <div className="col-md-4 mb-3">
+          <div className="panel h-100">
+            <div className="panel-body text-center">
+              <div className="text-info mb-3">
+                <i className="fa fa-comments fa-3x"></i>
+              </div>
+              <h5 className="panel-title mb-3">VIMM Chat</h5>
+              <p className="text-muted mb-4">
+                Real-time chat server with WebSocket support, moderation tools, 
+                and seamless integration with streaming components.
+              </p>
+              <Link
+                href="/components/chat"
+                className="btn btn-outline-info"
+              >
+                Learn more <i className="fa fa-arrow-right ms-1"></i>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Quick Start Section */}
-      <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 mb-16">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          Quick Start
-        </h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-6">
-          Get your VIMM framework up and running in minutes with our streamlined deployment process.
-        </p>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Prerequisites
-            </h3>
-            <ul className="text-gray-600 dark:text-gray-300 space-y-1">
-              <li>• Node.js 18+ and npm</li>
-              <li>• FFmpeg for media processing</li>
-              <li>• SSL certificates for production</li>
-              <li>• Domain name (recommended)</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Installation
-            </h3>
-            <ul className="text-gray-600 dark:text-gray-300 space-y-1">
-              <li>• Clone the repositories</li>
-              <li>• Configure environment variables</li>
-              <li>• Install dependencies</li>
-              <li>• Start the services</li>
-            </ul>
+      <div className="row mb-4">
+        <div className="col-lg-8">
+          <div className="panel panel-inverse">
+            <div className="panel-heading">
+              <h4 className="panel-title">
+                <i className="fa fa-rocket me-2"></i>
+                Quick Start Guide
+              </h4>
+            </div>
+            <div className="panel-body">
+              <p className="mb-4">
+                Get your VIMM framework up and running in minutes with our streamlined deployment process.
+              </p>
+              <div className="row">
+                <div className="col-md-6">
+                  <h6 className="fw-bold mb-3">
+                    <i className="fa fa-list-check me-2 text-primary"></i>
+                    Prerequisites
+                  </h6>
+                  <ul className="list-unstyled">
+                    <li className="mb-2"><i className="fa fa-check text-success me-2"></i> Node.js 18+ and npm</li>
+                    <li className="mb-2"><i className="fa fa-check text-success me-2"></i> FFmpeg for media processing</li>
+                    <li className="mb-2"><i className="fa fa-check text-success me-2"></i> SSL certificates for production</li>
+                    <li className="mb-2"><i className="fa fa-check text-success me-2"></i> Domain name (recommended)</li>
+                  </ul>
+                </div>
+                <div className="col-md-6">
+                  <h6 className="fw-bold mb-3">
+                    <i className="fa fa-download me-2 text-success"></i>
+                    Installation Steps
+                  </h6>
+                  <ul className="list-unstyled">
+                    <li className="mb-2"><i className="fa fa-arrow-right text-primary me-2"></i> Clone the repositories</li>
+                    <li className="mb-2"><i className="fa fa-arrow-right text-primary me-2"></i> Configure environment variables</li>
+                    <li className="mb-2"><i className="fa fa-arrow-right text-primary me-2"></i> Install dependencies</li>
+                    <li className="mb-2"><i className="fa fa-arrow-right text-primary me-2"></i> Start the services</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="mt-4">
+                <Link
+                  href="/getting-started/quick-start"
+                  className="btn btn-primary"
+                >
+                  <i className="fa fa-book me-2"></i>
+                  View detailed setup guide
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="mt-6">
-          <Link
-            href="/getting-started/quick-start"
-            className="inline-flex items-center text-vimm-orange hover:text-orange-600 font-medium"
-          >
-            View detailed setup guide
-            <ArrowRight className="ml-1 w-4 h-4" />
-          </Link>
+
+        <div className="col-lg-4">
+          <div className="panel">
+            <div className="panel-heading">
+              <h4 className="panel-title">
+                <i className="fa fa-star me-2"></i>
+                Key Features
+              </h4>
+            </div>
+            <div className="panel-body">
+              <ul className="list-unstyled">
+                <li className="mb-2">
+                  <i className="fa fa-circle text-primary me-2" style={{ fontSize: '8px' }}></i>
+                  Multi-protocol streaming
+                </li>
+                <li className="mb-2">
+                  <i className="fa fa-circle text-primary me-2" style={{ fontSize: '8px' }}></i>
+                  Hive blockchain integration
+                </li>
+                <li className="mb-2">
+                  <i className="fa fa-circle text-primary me-2" style={{ fontSize: '8px' }}></i>
+                  Real-time chat system
+                </li>
+                <li className="mb-2">
+                  <i className="fa fa-circle text-primary me-2" style={{ fontSize: '8px' }}></i>
+                  Adaptive bitrate streaming
+                </li>
+                <li className="mb-2">
+                  <i className="fa fa-circle text-primary me-2" style={{ fontSize: '8px' }}></i>
+                  Hardware acceleration
+                </li>
+                <li className="mb-2">
+                  <i className="fa fa-circle text-primary me-2" style={{ fontSize: '8px' }}></i>
+                  Horizontal scaling
+                </li>
+                <li className="mb-2">
+                  <i className="fa fa-circle text-primary me-2" style={{ fontSize: '8px' }}></i>
+                  Complete REST API
+                </li>
+                <li className="mb-2">
+                  <i className="fa fa-circle text-primary me-2" style={{ fontSize: '8px' }}></i>
+                  Production-ready security
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Features Section */}
-      <div className="mb-16">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-          Key Features
-        </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            'Multi-protocol streaming (RTMP, WebRTC, HLS)',
-            'Hive blockchain integration',
-            'Real-time chat system',
-            'Adaptive bitrate streaming',
-            'Hardware acceleration support',
-            'Horizontal scaling capability',
-            'Complete REST API',
-            'Production-ready security'
-          ].map((feature, index) => (
-            <div key={index} className="flex items-start">
-              <div className="w-2 h-2 bg-vimm-orange rounded-full mt-2 mr-3 flex-shrink-0"></div>
-              <span className="text-gray-600 dark:text-gray-300">{feature}</span>
+      {/* Recent Updates */}
+      <div className="row">
+        <div className="col-12">
+          <div className="panel">
+            <div className="panel-heading">
+              <h4 className="panel-title">
+                <i className="fa fa-clock me-2"></i>
+                Recent Updates
+              </h4>
             </div>
-          ))}
+            <div className="panel-body">
+              <div className="row">
+                <div className="col-md-4 mb-3">
+                  <div className="d-flex">
+                    <div className="flex-shrink-0">
+                      <div className="bg-primary text-white rounded p-2">
+                        <i className="fa fa-code-branch"></i>
+                      </div>
+                    </div>
+                    <div className="flex-grow-1 ms-3">
+                      <h6 className="mb-1">VIMM Core v2.1.0</h6>
+                      <p className="text-muted mb-1 small">Enhanced streaming performance and new WebRTC features</p>
+                      <small className="text-muted">2 days ago</small>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4 mb-3">
+                  <div className="d-flex">
+                    <div className="flex-shrink-0">
+                      <div className="bg-success text-white rounded p-2">
+                        <i className="fa fa-book"></i>
+                      </div>
+                    </div>
+                    <div className="flex-grow-1 ms-3">
+                      <h6 className="mb-1">Documentation Update</h6>
+                      <p className="text-muted mb-1 small">New Docker deployment guides and troubleshooting section</p>
+                      <small className="text-muted">1 week ago</small>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-4 mb-3">
+                  <div className="d-flex">
+                    <div className="flex-shrink-0">
+                      <div className="bg-info text-white rounded p-2">
+                        <i className="fa fa-shield-alt"></i>
+                      </div>
+                    </div>
+                    <div className="flex-grow-1 ms-3">
+                      <h6 className="mb-1">Security Enhancement</h6>
+                      <p className="text-muted mb-1 small">Improved authentication and rate limiting features</p>
+                      <small className="text-muted">2 weeks ago</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
