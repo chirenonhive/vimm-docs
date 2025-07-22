@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import RecentUpdates from './components/recent-updates'
 
 export default function Home() {
   return (
@@ -228,60 +229,7 @@ export default function Home() {
       {/* Recent Updates */}
       <div className="row">
         <div className="col-12">
-          <div className="panel">
-            <div className="panel-heading">
-              <h4 className="panel-title">
-                <i className="fa fa-clock me-2"></i>
-                Recent Updates
-              </h4>
-            </div>
-            <div className="panel-body">
-              <div className="row">
-                <div className="col-md-4 mb-3">
-                  <div className="d-flex">
-                    <div className="flex-shrink-0">
-                      <div className="bg-primary text-white rounded p-2">
-                        <i className="fa fa-code-branch"></i>
-                      </div>
-                    </div>
-                    <div className="flex-grow-1 ms-3">
-                      <h6 className="mb-1">VIMM Core v2.1.0</h6>
-                      <p className="text-muted mb-1 small">Enhanced streaming performance and new WebRTC features</p>
-                      <small className="text-muted">2 days ago</small>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 mb-3">
-                  <div className="d-flex">
-                    <div className="flex-shrink-0">
-                      <div className="bg-success text-white rounded p-2">
-                        <i className="fa fa-book"></i>
-                      </div>
-                    </div>
-                    <div className="flex-grow-1 ms-3">
-                      <h6 className="mb-1">Documentation Update</h6>
-                      <p className="text-muted mb-1 small">New Docker deployment guides and troubleshooting section</p>
-                      <small className="text-muted">1 week ago</small>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4 mb-3">
-                  <div className="d-flex">
-                    <div className="flex-shrink-0">
-                      <div className="bg-info text-white rounded p-2">
-                        <i className="fa fa-shield-alt"></i>
-                      </div>
-                    </div>
-                    <div className="flex-grow-1 ms-3">
-                      <h6 className="mb-1">Security Enhancement</h6>
-                      <p className="text-muted mb-1 small">Improved authentication and rate limiting features</p>
-                      <small className="text-muted">2 weeks ago</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <RecentUpdates />
         </div>
       </div>
     </div>

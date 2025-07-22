@@ -9,6 +9,17 @@ interface HivePost {
   created: string;
   author: string;
   json_metadata: string;
+  net_votes: number;
+  total_payout_value: string;
+  pending_payout_value: string;
+  curator_payout_value: string;
+  promoted: string;
+  active_votes: Array<{
+    voter: string;
+    weight: number;
+    rshares: number;
+    percent: number;
+  }>;
 }
 
 interface ParsedPost {
@@ -18,6 +29,12 @@ interface ParsedPost {
   created: string;
   author: string;
   url: string;
+  thumbnail?: string;
+  tags: string[];
+  upvotes: number;
+  totalPayout: number;
+  pendingPayout: number;
+  isPaidOut: boolean;
 }
 
 export function useHivePosts(author: string, searchTerm: string, limit: number = 5) {
@@ -63,9 +80,20 @@ export function useHivePosts(author: string, searchTerm: string, limit: number =
           .slice(0, limit)
           .map((post: HivePost) => {
             let description = '';
+            let thumbnail = '';
+            let tags: string[] = [];
+            
             try {
               const metadata = JSON.parse(post.json_metadata || '{}');
               description = metadata.description || '';
+              tags = metadata.tags || [];
+              
+              // Extract thumbnail from images array or image field
+              if (metadata.image && metadata.image.length > 0) {
+                thumbnail = metadata.image[0];
+              } else if (metadata.images && metadata.images.length > 0) {
+                thumbnail = metadata.images[0];
+              }
             } catch {
               // Fallback to first 100 characters of body
               description = post.body.replace(/[#*`\[\]()]/g, '').substring(0, 100);
@@ -80,6 +108,14 @@ export function useHivePosts(author: string, searchTerm: string, limit: number =
                 .trim() + '...';
             }
 
+            // Calculate total payout (paid + pending)
+            const totalPayout = parseFloat(post.total_payout_value.split(' ')[0]) || 0;
+            const pendingPayout = parseFloat(post.pending_payout_value.split(' ')[0]) || 0;
+            const curatorPayout = parseFloat(post.curator_payout_value.split(' ')[0]) || 0;
+            
+            // Calculate upvotes (positive votes)
+            const upvotes = post.active_votes?.filter(vote => vote.percent > 0).length || 0;
+
             return {
               permlink: post.permlink,
               title: post.title,
@@ -87,6 +123,12 @@ export function useHivePosts(author: string, searchTerm: string, limit: number =
               created: post.created,
               author: post.author,
               url: `https://peakd.com/@${post.author}/${post.permlink}`,
+              thumbnail: thumbnail || undefined,
+              tags: tags.slice(0, 5), // Limit to first 5 tags
+              upvotes,
+              totalPayout: totalPayout + curatorPayout,
+              pendingPayout,
+              isPaidOut: pendingPayout === 0 && totalPayout > 0,
             };
           });
 
