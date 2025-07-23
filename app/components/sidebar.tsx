@@ -19,9 +19,9 @@ const navigation = [
     title: 'Core Components',
     icon: 'fa fa-cube',
     items: [
-      { title: 'VIMM Core', href: '/components/core', icon: 'fa fa-server' },
-      { title: 'VIMM Frontend', href: '/components/frontend', icon: 'fa fa-desktop' },
-      { title: 'VIMM Chat', href: '/components/chat', icon: 'fa fa-comments' },
+      { title: 'VIMM Core', href: '/server-components/core', icon: 'fa fa-server' },
+      { title: 'VIMM Frontend', href: '/server-components/frontend', icon: 'fa fa-desktop' },
+      { title: 'VIMM Chat', href: '/server-components/chat', icon: 'fa fa-comments' },
     ]
   },
   /* {
