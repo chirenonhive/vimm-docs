@@ -118,7 +118,7 @@ export default function RecentUpdates() {
                         {post.isPaidOut ? (
                           <span className="badge bg-success">
                             <i className="fa fa-coins me-1"></i>
-                            ${formatReward(post.totalPayout)} HBD
+                            {formatReward(post.totalPayout)} HBD
                           </span>
                         ) : (
                           <span className="badge bg-warning text-dark">
