@@ -2,14 +2,29 @@
 
 import { useAppSettings } from '../config/app-settings';
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useHivePosts } from '../hooks/useHivePosts';
+import SearchDropdown from './search-dropdown';
 
 export default function Header() {
   const { settings, updateSettings } = useAppSettings();
   const { theme, setTheme } = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
   const { posts: hivePosts, loading: postsLoading, error: postsError } = useHivePosts('chiren', 'development', 5);
+
+  // Handle click outside search dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const formatTimeAgo = (dateString: string) => {
     const now = new Date();
@@ -34,8 +49,23 @@ export default function Header() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement search functionality
-    console.log('Search query:', searchQuery);
+    if (searchQuery.trim()) {
+      // Navigate to search page with query
+      setShowDropdown(false);
+      window.location.href = `/search?q=${encodeURIComponent(searchQuery.trim())}`;
+    }
+  };
+
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    setShowDropdown(value.trim().length >= 2);
+  };
+
+  const handleSearchInputFocus = () => {
+    if (searchQuery.trim().length >= 2) {
+      setShowDropdown(true);
+    }
   };
 
   return (
@@ -58,20 +88,28 @@ export default function Header() {
 
       <div className="navbar-nav">
         {/* Search Form */}
-        <div className="navbar-item navbar-form">
+        <div className="navbar-item navbar-form" ref={searchContainerRef}>
           <form onSubmit={handleSearch} name="search">
-            <div className="form-group d-flex">
+            <div className="form-group d-flex position-relative">
               <input 
                 type="text" 
                 className="form-control" 
                 placeholder="Search documentation..." 
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchInputChange}
+                onFocus={handleSearchInputFocus}
                 style={{ minWidth: '250px' }}
               />
               <button type="submit" className="btn btn-search ms-2">
                 <i className="fa fa-search"></i>
               </button>
+              
+              {showDropdown && (
+                <SearchDropdown 
+                  query={searchQuery} 
+                  onSelectResult={() => setShowDropdown(false)}
+                />
+              )}
             </div>
           </form>
         </div>
