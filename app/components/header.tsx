@@ -176,7 +176,7 @@ export default function Header() {
             <a href="https://github.com/VIMM-TV/vimm-docs/issues" className="dropdown-item" target="_blank">
               <i className="fa fa-bug me-2"></i> Report Issue
             </a>
-            <a href="https://discord.gg/vimm" className="dropdown-item" target="_blank">
+            <a href="https://discord.gg/aR2RWGU" className="dropdown-item" target="_blank">
               <i className="fab fa-discord me-2"></i> Join Discord
             </a>
             <div className="dropdown-divider"></div>
