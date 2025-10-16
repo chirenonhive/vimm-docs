@@ -24,16 +24,27 @@ const navigation = [
       { title: 'VIMM Chat', href: '/server-components/chat', icon: 'fa fa-comments' },
     ]
   },
-  /* {
-    title: 'Deployment',
-    icon: 'fa fa-upload',
+  {
+    title: 'API Reference',
+    icon: 'fa fa-code',
     items: [
-      { title: 'Single Server', href: '/deployment/single-server', icon: 'fa fa-server' },
-      { title: 'Multi Server', href: '/deployment/multi-server', icon: 'fa fa-network-wired' },
-      { title: 'Docker', href: '/deployment/docker', icon: 'fab fa-docker' },
-      { title: 'Production Setup', href: '/deployment/production', icon: 'fa fa-cogs' },
+      { title: 'Overview', href: '/api-reference', icon: 'fa fa-book' },
+      { title: 'Authentication', href: '/api-reference/authentication', icon: 'fa fa-key' },
+      { title: 'Streams', href: '/api-reference/streams', icon: 'fa fa-video' },
+      { title: 'Channels', href: '/api-reference/channels', icon: 'fa fa-tv' },
+      { title: 'User', href: '/api-reference/user', icon: 'fa fa-user' },
+      { title: 'Chat', href: '/api-reference/chat', icon: 'fa fa-comment' },
+      { title: 'HLS Encryption', href: '/api-reference/hls', icon: 'fa fa-lock' },
+      { title: 'Dashboard', href: '/api-reference/dashboard', icon: 'fa fa-chart-line' },
     ]
-  }, */
+  },
+  {
+    title: 'Integration',
+    icon: 'fa fa-plug',
+    items: [
+      { title: 'Frontend Integration', href: '/integration/frontend', icon: 'fa fa-desktop' },
+    ]
+  },
   {
     title: 'Configuration',
     icon: 'fa fa-cog',
@@ -61,7 +72,8 @@ export default function Sidebar() {
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
     'Getting Started': true,
     'Core Components': false,
-    //'Deployment': false,
+    'API Reference': false,
+    'Integration': false,
     'Configuration': false,
     'Guides & Help': false,
   });

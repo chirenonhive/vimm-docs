@@ -111,48 +111,50 @@ git clone https://github.com/VIMM-TV/vimm-chat.git`} />
       <div className="relative group mb-4">
         <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
           <code>{`cd vimm-core
-cp .env.example .env`}</code>
+# Create .env file (no .env.example provided in v1.0.0)`}</code>
         </pre>
-        <CopyButton text={`cd vimm-core
-cp .env.example .env`} />
+        <CopyButton text={`cd vimm-core`} />
       </div>
       <p className="text-gray-600 dark:text-gray-300 mb-4">
-        Edit the `.env` file with your configuration. Key variables include:
+        Create a <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">.env</code> file in the vimm-core directory with the following <strong>required</strong> variables:
       </p>
       <div className="relative group mb-6">
         <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
-          <code>{`# Database
-DB_PATH=./data/vimm.db
+          <code>{`# Required Variables
+JWT_SECRET=your-strong-secret-key-here
+HIVE_POSTING_KEY=your-hive-posting-key
 
-# Server Configuration
-PORT=3000
-RTMP_PORT=1935
-
-# Hive Blockchain
-HIVE_NODE=https://api.hive.blog
-HIVE_ACCOUNT=your-hive-account
-HIVE_KEY=your-posting-key
-
-# Stream Settings
-STREAM_DIR=./streams
-RECORDING_ENABLED=true`}</code>
+# Optional Variables
+SERVER_URL=http://localhost:3000
+NODE_ENV=development`}</code>
         </pre>
-        <CopyButton text={`# Database
-DB_PATH=./data/vimm.db
+        <CopyButton text={`# Required Variables
+JWT_SECRET=your-strong-secret-key-here
+HIVE_POSTING_KEY=your-hive-posting-key
 
-# Server Configuration
-PORT=3000
-RTMP_PORT=1935
-
-# Hive Blockchain
-HIVE_NODE=https://api.hive.blog
-HIVE_ACCOUNT=your-hive-account
-HIVE_KEY=your-posting-key
-
-# Stream Settings
-STREAM_DIR=./streams
-RECORDING_ENABLED=true`} />
+# Optional Variables
+SERVER_URL=http://localhost:3000
+NODE_ENV=development`} />
       </div>
+
+      <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 mb-6">
+        <h4 className="text-lg font-semibold text-yellow-800 dark:text-yellow-400 mb-2">
+          🔑 Important: Required Environment Variables
+        </h4>
+        <ul className="text-yellow-600 dark:text-yellow-300 space-y-1">
+          <li>• <strong>JWT_SECRET</strong>: Used for signing JWT authentication tokens (7-day expiry). Must be a strong, random string.</li>
+          <li>• <strong>HIVE_POSTING_KEY</strong>: Your Hive posting key for creating stream posts and updates on the blockchain.</li>
+        </ul>
+      </div>
+
+      <p className="text-gray-600 dark:text-gray-300 mb-4">
+        Configuration files are located in the <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">config/</code> directory:
+      </p>
+      <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 mb-6 space-y-2">
+        <li><strong>config/default.js</strong>: App settings (transcoding, thumbnails, watch URL structure)</li>
+        <li><strong>config/hive.js</strong>: Hive blockchain settings (tags, beneficiaries)</li>
+        <li><strong>config/config.json</strong>: Database configuration (default: SQLite)</li>
+      </ul>
 
       <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
         VIMM Frontend Configuration
@@ -260,15 +262,34 @@ npm install`} />
         Step 4: Initialize Database
       </h2>
       <p className="text-gray-600 dark:text-gray-300 mb-4">
-        Initialize the database for VIMM Core:
+        VIMM Core uses Sequelize ORM with SQLite by default. Initialize the database with these commands:
       </p>
-      <div className="relative group mb-6">
+      <div className="relative group mb-4">
         <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
           <code>{`cd vimm-core
 npm run init-db`}</code>
         </pre>
         <CopyButton text={`cd vimm-core
 npm run init-db`} />
+      </div>
+      <p className="text-gray-600 dark:text-gray-300 mb-4">
+        For dashboard analytics features, also create the dashboard tables:
+      </p>
+      <div className="relative group mb-6">
+        <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+          <code>{`node scripts/create-dashboard-tables.js`}</code>
+        </pre>
+        <CopyButton text={`node scripts/create-dashboard-tables.js`} />
+      </div>
+
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
+        <h4 className="text-lg font-semibold text-blue-800 dark:text-blue-400 mb-2">
+          📊 Dashboard Analytics
+        </h4>
+        <p className="text-blue-600 dark:text-blue-300">
+          The dashboard tables enable stream statistics, follower growth tracking, and ban management. 
+          For production, set up a daily cron job: <code className="bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded">node scripts/snapshot-follower-growth.js</code>
+        </p>
       </div>
 
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
@@ -326,12 +347,30 @@ npm start`} />
         <li><strong>VIMM Frontend</strong>: <a href="http://localhost:3002" className="text-vimm-orange hover:underline">http://localhost:3002</a> - Should show the VIMM web interface</li>
       </ul>
 
+      <p className="text-gray-600 dark:text-gray-300 mb-4">
+        Test the VIMM Core API with these endpoints:
+      </p>
+      <div className="relative group mb-6">
+        <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+          <code>{`# Test authentication challenge endpoint
+curl http://localhost:3000/api/auth/challenge
+
+# List active streams
+curl http://localhost:3000/api/streams
+
+# Check database connection
+# The server should start without errors and log "Database synced"`}</code>
+        </pre>
+        <CopyButton text={`curl http://localhost:3000/api/auth/challenge
+curl http://localhost:3000/api/streams`} />
+      </div>
+
       <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 mb-6">
         <h3 className="text-lg font-semibold text-green-800 dark:text-green-400 mb-2">
           🎉 Success!
         </h3>
         <p className="text-green-600 dark:text-green-300">
-          Your VIMM framework is now running! You can access the core interface at <strong>http://localhost:3002</strong> to get a stream key and start streaming.
+          Your VIMM framework is now running! Access the frontend at <strong>http://localhost:3002</strong> to explore streams, authenticate with Hive Keychain, and configure your channel for streaming.
         </p>
       </div>
 
@@ -339,11 +378,26 @@ npm start`} />
         Next Steps
       </h2>
       <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 mb-6 space-y-2">
+        <li>Generate a streaming key by authenticating with Hive Keychain in the frontend</li>
         <li>Configure your streaming software (OBS, etc.) to stream to <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">rtmp://localhost:1935/live/YOUR_STREAM_KEY</code></li>
+        <li>Review <strong>Configuration Reference</strong> for advanced settings (transcoding, thumbnails, HLS encryption)</li>
         <li>Set up SSL certificates for production deployment</li>
-        <li>Configure your Hive blockchain credentials for full integration</li>
-        <li>Explore the configuration options for optimal performance</li>
+        <li>Configure Hive beneficiaries in <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">config/hive.js</code></li>
+        <li>Explore the <strong>API Reference</strong> to build custom integrations</li>
       </ul>
+
+      <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 mb-6">
+        <h3 className="text-lg font-semibold text-yellow-800 dark:text-yellow-400 mb-2">
+          ⚠️ Production Considerations
+        </h3>
+        <ul className="text-yellow-600 dark:text-yellow-300 space-y-1">
+          <li>• Use PostgreSQL or MySQL instead of SQLite for better performance</li>
+          <li>• Enable HTTPS with proper SSL certificates</li>
+          <li>• Set strong JWT_SECRET and keep it secure</li>
+          <li>• Configure firewall rules for ports 3000 (API), 1935 (RTMP)</li>
+          <li>• Set up daily cron for follower growth snapshots</li>
+        </ul>
+      </div>
 
       <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
         <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-400 mb-2">
