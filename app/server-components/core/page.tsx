@@ -199,34 +199,48 @@ TEMP_DIR=./temp`} />
         API Endpoints
       </h2>
       <p className="text-gray-600 dark:text-gray-300 mb-4">
-        VIMM Core exposes a comprehensive REST API:
+        VIMM Core v1.0.0 exposes a REST API for authentication, streaming, and channel management. 
+        For complete API documentation, see the <a href="/api-reference" className="text-vimm-orange hover:underline">API Reference</a> section.
       </p>
 
       <div className="space-y-4 mb-6">
         <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Stream Management</h4>
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Authentication</h4>
+          <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/auth/challenge</code> - Get challenge for signing</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">POST /api/auth/hive</code> - Submit signature, receive JWT</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">POST /api/auth/verify</code> - Verify token validity</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">POST /api/auth/stream-key</code> - Generate streaming key</div>
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Streams</h4>
           <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
             <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/streams</code> - List active streams</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">POST /api/streams</code> - Create new stream</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/streams/:id</code> - Get stream details</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/streams/:username</code> - Get stream info</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/streams/:streamId/thumbnail</code> - Get thumbnail</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/streams/stats/:username</code> - Dashboard stats (auth)</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/streams/followers/growth/:username</code> - Follower growth (auth)</div>
           </div>
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">User Management</h4>
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Channels & User</h4>
           <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">POST /api/auth/login</code> - Hive account login</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/users/:username</code> - Get user profile</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">PUT /api/users/:username</code> - Update user profile</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">POST /api/channels/follow</code> - Follow channel (auth)</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">DELETE /api/channels/unfollow</code> - Unfollow channel (auth)</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/user/followed-channels</code> - Get followed channels (auth)</div>
           </div>
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Analytics</h4>
+          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Chat & HLS</h4>
           <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/analytics/streams</code> - Stream analytics</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/analytics/users</code> - User analytics</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/analytics/revenue</code> - Revenue analytics</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/chat/stream/:hiveAccount</code> - Get chat config</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">POST /api/chat/stream/:hiveAccount</code> - Update chat config (auth)</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">POST /api/hls/token/:streamId</code> - Generate HLS access token</div>
+            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">GET /api/hls/key/:streamId</code> - Get encryption key (with token)</div>
           </div>
         </div>
       </div>
