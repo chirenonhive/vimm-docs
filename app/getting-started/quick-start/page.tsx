@@ -331,7 +331,7 @@ npm start`} />
           🎉 Success!
         </h3>
         <p className="text-green-600 dark:text-green-300">
-          Your VIMM framework is now running! You can access the core interface at <strong>http://localhost:3000</strong> to get a stream key and start streaming.
+          Your VIMM framework is now running! You can access the core interface at <strong>http://localhost:3002</strong> to get a stream key and start streaming.
         </p>
       </div>
 
