@@ -157,6 +157,9 @@ RECORDING_ENABLED=true`} />
       <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
         VIMM Frontend Configuration
       </h3>
+      <p className="text-gray-600 dark:text-gray-300 mb-4">
+        The frontend is a React 19 application that connects to both VIMM Core and VIMM Chat servers. It requires Hive Keychain browser extension for authentication.
+      </p>
       <div className="relative group mb-4">
         <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
           <code>{`cd ../vimm-frontend
@@ -167,23 +170,27 @@ cp .env.example .env`} />
       </div>
       <div className="relative group mb-6">
         <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
-          <code>{`# API Configuration
-REACT_APP_API_URL=http://localhost:3000
-REACT_APP_CHAT_URL=http://localhost:3001
+          <code>{`# Server Endpoints (adjust to your deployment)
+REACT_APP_VIMM_CHAT_SERVER=http://localhost:3001
+REACT_APP_VIMM_CORE_SERVER=http://localhost:3000
 
-# Frontend Settings
-PORT=3002
-REACT_APP_SITE_NAME=VIMM
-REACT_APP_SITE_URL=http://localhost:3002`}</code>
+# Optional: Override default ports
+PORT=3002`}</code>
         </pre>
-        <CopyButton text={`# API Configuration
-REACT_APP_API_URL=http://localhost:3000
-REACT_APP_CHAT_URL=http://localhost:3001
+        <CopyButton text={`# Server Endpoints (adjust to your deployment)
+REACT_APP_VIMM_CHAT_SERVER=http://localhost:3001
+REACT_APP_VIMM_CORE_SERVER=http://localhost:3000
 
-# Frontend Settings
-PORT=3002
-REACT_APP_SITE_NAME=VIMM
-REACT_APP_SITE_URL=http://localhost:3002`} />
+# Optional: Override default ports
+PORT=3002`} />
+      </div>
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
+        <h4 className="text-lg font-semibold text-blue-800 dark:text-blue-400 mb-2">
+          📦 Hive Keychain Required
+        </h4>
+        <p className="text-blue-600 dark:text-blue-300">
+          Users must install the <a href="https://hive-keychain.com/" className="underline" target="_blank" rel="noopener noreferrer">Hive Keychain browser extension</a> to authenticate and interact with the VIMM platform. This is required for following, chatting, and streaming.
+        </p>
       </div>
 
       <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">

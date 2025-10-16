@@ -9,17 +9,21 @@ export default function FrontendComponentPage() {
         VIMM Frontend
       </h1>
       <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-        The user-facing web application providing the streaming interface for viewers and streamers. 
-        Built with React and modern web technologies for optimal performance and user experience.
+        A React 19-based reference implementation that integrates VIMM Core (streaming server) and VIMM Chat 
+        (real-time chat) while implementing Hive blockchain social features for a complete live streaming experience.
       </p>
 
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
         Overview
       </h2>
+      <p className="text-gray-600 dark:text-gray-300 mb-4">
+        VIMM Frontend is the web application that ties together the VIMM ecosystem. It provides a comprehensive 
+        user interface for stream discovery, live viewing with HLS.js player, real-time chat via Socket.IO, 
+        and streamer management tools. Built with modern React patterns and Hive blockchain integration.
+      </p>
       <p className="text-gray-600 dark:text-gray-300 mb-6">
-        VIMM Frontend is the web application that users interact with to watch streams, chat with 
-        other viewers, manage their profiles, and access all VIMM platform features. It's designed 
-        to be responsive, fast, and accessible across all devices.
+        As a reference implementation, it demonstrates best practices for integrating all VIMM components 
+        and can be customized or used as a foundation for your own streaming platform.
       </p>
 
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
@@ -28,19 +32,19 @@ export default function FrontendComponentPage() {
       <div className="grid md:grid-cols-2 gap-6 mb-8">
         <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-            📺 Stream Player
+            📺 Stream Viewing
           </h3>
           <p className="text-gray-600 dark:text-gray-300">
-            Advanced video player with adaptive bitrate streaming, quality selection, and fullscreen support.
+            HLS.js-based adaptive video player with real-time chat integration and stream information display.
           </p>
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-            💬 Integrated Chat
+            💬 Real-time Chat
           </h3>
           <p className="text-gray-600 dark:text-gray-300">
-            Real-time chat interface with emotes, moderation tools, and interactive features.
+            Socket.IO-powered chat with moderator tools, message history, and connection status indicators.
           </p>
         </div>
 
@@ -49,37 +53,35 @@ export default function FrontendComponentPage() {
             🎛️ Streamer Dashboard
           </h3>
           <p className="text-gray-600 dark:text-gray-300">
-            Comprehensive dashboard for streamers to manage their channel, analytics, and settings.
+            Comprehensive control panel with live stats, chat moderation, and stream settings management.
           </p>
         </div>
 
         <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-            📱 Responsive Design
+            🔐 Hive Authentication
           </h3>
           <p className="text-gray-600 dark:text-gray-300">
-            Mobile-first design that works seamlessly across desktop, tablet, and mobile devices.
+            Decentralized authentication using Hive Keychain with JWT token management and protected routes.
           </p>
         </div>
       </div>
 
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-        Technology Stack
+        Architecture & Structure
       </h2>
       <p className="text-gray-600 dark:text-gray-300 mb-4">
-        VIMM Frontend is built with modern web technologies:
+        The frontend follows a component-based architecture with clear separation of concerns:
       </p>
       <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 mb-6">
         <pre className="text-sm text-gray-700 dark:text-gray-300">
-{`┌─────────────────────────────────────────┐
-│            VIMM Frontend                │
-├─────────────────────────────────────────┤
-│   React 18   │  TypeScript  │  Next.js  │
-├─────────────────────────────────────────┤
-│ Tailwind CSS │  Socket.IO   │  Video.js │
-├─────────────────────────────────────────┤
-│   PWA Ready  │  Service SW  │  Offline  │
-└─────────────────────────────────────────┘`}
+{`vimm-frontend/
+├── src/
+│   ├── pages/          # Route components
+│   ├── components/     # Reusable UI  
+│   ├── services/       # API layer (singletons)
+│   ├── contexts/       # React contexts
+│   └── config/         # Configuration`}
         </pre>
       </div>
 
@@ -88,299 +90,200 @@ export default function FrontendComponentPage() {
       </h2>
 
       <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-        Video Player
+        WatchPage - Stream Viewing Interface
       </h3>
       <p className="text-gray-600 dark:text-gray-300 mb-4">
-        Advanced streaming video player features:
+        Main stream viewing page combining video player and chat:
       </p>
       <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 mb-6 space-y-1">
-        <li>HLS and DASH protocol support</li>
-        <li>Adaptive bitrate streaming (ABR)</li>
-        <li>Manual quality selection</li>
-        <li>Theater and fullscreen modes</li>
-        <li>Picture-in-picture support</li>
-        <li>Live DVR functionality</li>
-        <li>Low-latency streaming</li>
+        <li>HLS.js-based adaptive video player</li>
+        <li>Real-time chat integration</li>
+        <li>Stream information display</li>
+        <li>Follow/unfollow functionality</li>
+        <li>Mobile-responsive with fullscreen support</li>
       </ul>
 
       <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-        Chat Interface
+        StreamerDashboard - Control Panel
       </h3>
       <p className="text-gray-600 dark:text-gray-300 mb-4">
-        Interactive chat experience:
+        Comprehensive dashboard for streamers:
       </p>
       <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 mb-6 space-y-1">
-        <li>Real-time message display</li>
-        <li>Custom emotes and badges</li>
-        <li>User mentions and replies</li>
-        <li>Moderation controls</li>
-        <li>Chat history and search</li>
-        <li>Private messaging</li>
-        <li>Mobile-optimized interface</li>
+        <li>Live stream preview</li>
+        <li>Real-time viewer statistics</li>
+        <li>Chat moderation tools</li>
+        <li>Stream settings editor</li>
+        <li>Protected route requiring authentication</li>
       </ul>
 
       <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-        User Dashboard
+        Service Layer Pattern
       </h3>
       <p className="text-gray-600 dark:text-gray-300 mb-4">
-        Comprehensive user management:
+        API interactions through singleton services:
       </p>
       <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 mb-6 space-y-1">
-        <li>Profile management and customization</li>
-        <li>Stream analytics and insights</li>
-        <li>Revenue tracking and payouts</li>
-        <li>Follower and subscriber management</li>
-        <li>Stream scheduling tools</li>
-        <li>Content management system</li>
+        <li>streamService - Stream data and metadata</li>
+        <li>chatService - Chat messaging and history</li>
+        <li>dashboardService - Dashboard statistics</li>
+        <li>hiveAuth - Hive authentication</li>
+        <li>followService - Follow/unfollow management</li>
       </ul>
 
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
         Configuration
       </h2>
       <p className="text-gray-600 dark:text-gray-300 mb-4">
-        Key configuration options for VIMM Frontend:
+        Environment variables for VIMM Frontend:
       </p>
       <div className="relative group mb-6">
         <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
-          <code>{`# App Configuration
-REACT_APP_SITE_NAME=VIMM
-REACT_APP_SITE_URL=http://localhost:3002
-REACT_APP_VERSION=1.0.0
+          <code>{`# .env file
+REACT_APP_VIMM_CHAT_SERVER=https://chat.vimm.tv
+REACT_APP_VIMM_CORE_SERVER=https://www.vimm.tv
 
-# API Endpoints
-REACT_APP_API_URL=http://localhost:3000
-REACT_APP_CHAT_URL=http://localhost:3001
-REACT_APP_WEBSOCKET_URL=ws://localhost:3001
-
-# Features
-REACT_APP_CHAT_ENABLED=true
-REACT_APP_DONATIONS_ENABLED=true
-REACT_APP_SUBSCRIPTIONS_ENABLED=true
-REACT_APP_ANALYTICS_ENABLED=true
-
-# Video Player
-REACT_APP_HLS_ENABLED=true
-REACT_APP_DASH_ENABLED=true
-REACT_APP_WEBRTC_ENABLED=true
-REACT_APP_DVR_ENABLED=true
-
-# Theme and Branding
-REACT_APP_PRIMARY_COLOR=#ff6b35
-REACT_APP_SECONDARY_COLOR=#1a1a1a
-REACT_APP_LOGO_URL=/assets/logo.png
-
-# Social Integration
-REACT_APP_TWITTER_HANDLE=vimm_tv
-REACT_APP_DISCORD_INVITE=discord.gg/vimm
-REACT_APP_GITHUB_URL=github.com/VIMM-TV
-
-# Analytics
-REACT_APP_GA_TRACKING_ID=G-XXXXXXXXXX
-REACT_APP_HOTJAR_ID=1234567`}</code>
+# For local development
+REACT_APP_VIMM_CHAT_SERVER=http://localhost:3001
+REACT_APP_VIMM_CORE_SERVER=http://localhost:3000
+PORT=3002`}</code>
         </pre>
-        <CopyButton text={`# App Configuration
-REACT_APP_SITE_NAME=VIMM
-REACT_APP_SITE_URL=http://localhost:3002
-REACT_APP_VERSION=1.0.0
+        <CopyButton text={`# .env file
+REACT_APP_VIMM_CHAT_SERVER=https://chat.vimm.tv
+REACT_APP_VIMM_CORE_SERVER=https://www.vimm.tv
 
-# API Endpoints
-REACT_APP_API_URL=http://localhost:3000
-REACT_APP_CHAT_URL=http://localhost:3001
-REACT_APP_WEBSOCKET_URL=ws://localhost:3001
-
-# Features
-REACT_APP_CHAT_ENABLED=true
-REACT_APP_DONATIONS_ENABLED=true
-REACT_APP_SUBSCRIPTIONS_ENABLED=true
-REACT_APP_ANALYTICS_ENABLED=true
-
-# Video Player
-REACT_APP_HLS_ENABLED=true
-REACT_APP_DASH_ENABLED=true
-REACT_APP_WEBRTC_ENABLED=true
-REACT_APP_DVR_ENABLED=true
-
-# Theme and Branding
-REACT_APP_PRIMARY_COLOR=#ff6b35
-REACT_APP_SECONDARY_COLOR=#1a1a1a
-REACT_APP_LOGO_URL=/assets/logo.png
-
-# Social Integration
-REACT_APP_TWITTER_HANDLE=vimm_tv
-REACT_APP_DISCORD_INVITE=discord.gg/vimm
-REACT_APP_GITHUB_URL=github.com/VIMM-TV
-
-# Analytics
-REACT_APP_GA_TRACKING_ID=G-XXXXXXXXXX
-REACT_APP_HOTJAR_ID=1234567`} />
+# For local development
+REACT_APP_VIMM_CHAT_SERVER=http://localhost:3001
+REACT_APP_VIMM_CORE_SERVER=http://localhost:3000
+PORT=3002`} />
       </div>
 
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-        Page Structure
+        Dependencies
       </h2>
       <p className="text-gray-600 dark:text-gray-300 mb-4">
-        Key pages and routes in the VIMM Frontend:
+        Core dependencies required by VIMM Frontend:
       </p>
-
-      <div className="space-y-4 mb-6">
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Public Pages</h4>
-          <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">/</code> - Homepage with featured streams</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">/browse</code> - Browse all live streams</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">/channel/:username</code> - Individual channel page</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">/category/:name</code> - Browse by category</div>
-          </div>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">User Pages</h4>
-          <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">/dashboard</code> - User dashboard</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">/profile</code> - Profile settings</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">/following</code> - Followed channels</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">/subscriptions</code> - Subscription management</div>
-          </div>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Streamer Pages</h4>
-          <div className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">/streamer/dashboard</code> - Streamer control panel</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">/streamer/analytics</code> - Stream analytics</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">/streamer/settings</code> - Channel settings</div>
-            <div><code className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">/streamer/monetization</code> - Revenue management</div>
-          </div>
-        </div>
-      </div>
-
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-        Customization
-      </h2>
-      <p className="text-gray-600 dark:text-gray-300 mb-4">
-        VIMM Frontend supports extensive customization:
-      </p>
-
-      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-        Theming
-      </h3>
-      <div className="relative group mb-4">
+      <div className="relative group mb-6">
         <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
-          <code>{`// tailwind.config.js
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        'vimm': {
-          'orange': '#ff6b35',
-          'dark': '#1a1a1a',
-          'gray': '#2a2a2a'
-        }
-      }
-    }
+          <code>{`{
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^6.x",
+    "socket.io-client": "^4.7.3",
+    "hls.js": "^1.x"
   }
 }`}</code>
         </pre>
-        <CopyButton text={`// tailwind.config.js
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        'vimm': {
-          'orange': '#ff6b35',
-          'dark': '#1a1a1a',
-          'gray': '#2a2a2a'
-        }
-      }
-    }
+        <CopyButton text={`{
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^6.x",
+    "socket.io-client": "^4.7.3",
+    "hls.js": "^1.x"
   }
 }`} />
       </div>
 
-      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-        Component Customization
-      </h3>
-      <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 mb-6 space-y-1">
-        <li>Custom player skins and controls</li>
-        <li>Branded chat themes and emotes</li>
-        <li>Personalized dashboard layouts</li>
-        <li>Custom overlay components</li>
-        <li>White-label branding options</li>
-      </ul>
-
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-        Performance Optimization
+        Authentication Flow
       </h2>
       <p className="text-gray-600 dark:text-gray-300 mb-4">
-        Built-in performance optimizations:
+        VIMM Frontend uses Hive Keychain for decentralized authentication:
       </p>
-      <ul className="list-disc pl-6 text-gray-600 dark:text-gray-300 mb-6 space-y-2">
-        <li><strong>Code splitting</strong>: Automatic route-based code splitting</li>
-        <li><strong>Image optimization</strong>: Next.js Image component with WebP support</li>
-        <li><strong>Caching</strong>: Aggressive caching strategies for static assets</li>
-        <li><strong>PWA features</strong>: Service worker for offline functionality</li>
-        <li><strong>Lazy loading</strong>: Components and images load on demand</li>
-        <li><strong>Bundle optimization</strong>: Tree shaking and minification</li>
-      </ul>
+      <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 mb-6">
+        <ol className="list-decimal pl-6 text-gray-600 dark:text-gray-300 space-y-2">
+          <li>User clicks "Login with Hive" in Navbar</li>
+          <li>HiveLogin component opens and user enters Hive username</li>
+          <li>Hive Keychain browser extension prompts for signature</li>
+          <li>Frontend sends authentication request to VIMM Core</li>
+          <li>Core validates signature and returns JWT token</li>
+          <li>Token stored in AuthContext and localStorage</li>
+          <li>Token included in API requests</li>
+        </ol>
+      </div>
 
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-        Development Workflow
+        Quick Start
       </h2>
-      <p className="text-gray-600 dark:text-gray-300 mb-4">
-        Development commands and workflows:
-      </p>
       <div className="relative group mb-6">
         <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
-          <code>{`# Development server with hot reload
-npm run dev
+          <code>{`# Clone repository
+git clone https://github.com/VIMM-TV/vimm-frontend.git
+cd vimm-frontend
 
-# Production build
-npm run build
+# Install dependencies
+npm install
 
-# Start production server
-npm start
+# Configure environment
+cp .env.example .env
+# Edit .env with server URLs
 
-# Run tests
-npm test
-
-# Lint code
-npm run lint
-
-# Type checking
-npm run type-check
-
-# Bundle analysis
-npm run analyze`}</code>
+# Start development server
+npm start`}</code>
         </pre>
-        <CopyButton text={`# Development server with hot reload
-npm run dev
+        <CopyButton text={`# Clone repository
+git clone https://github.com/VIMM-TV/vimm-frontend.git
+cd vimm-frontend
 
-# Production build
-npm run build
+# Install dependencies
+npm install
 
-# Start production server
-npm start
+# Configure environment
+cp .env.example .env
+# Edit .env with server URLs
 
-# Run tests
-npm test
+# Start development server
+npm start`} />
+      </div>
 
-# Lint code
-npm run lint
+      <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 mb-6">
+        <h3 className="text-lg font-semibold text-yellow-800 dark:text-yellow-400 mb-2">
+          ⚠️ Prerequisites
+        </h3>
+        <ul className="text-yellow-600 dark:text-yellow-300 space-y-1">
+          <li>• VIMM Core server must be running</li>
+          <li>• VIMM Chat server must be running</li>
+          <li>• Hive Keychain extension required</li>
+          <li>• CORS configured on both servers</li>
+        </ul>
+      </div>
 
-# Type checking
-npm run type-check
-
-# Bundle analysis
-npm run analyze`} />
+      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        Development Tips
+      </h2>
+      <div className="space-y-4 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-900 dark:text-white mb-2">🔧 Hot Reload</h3>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">
+            Use npm start for development with automatic hot reloading.
+          </p>
+        </div>
+        
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-900 dark:text-white mb-2">🎭 Mock Data</h3>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">
+            Dashboard includes mock data fallbacks for development.
+          </p>
+        </div>
+        
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-900 dark:text-white mb-2">🌐 CORS</h3>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">
+            Ensure servers allow requests from your frontend origin.
+          </p>
+        </div>
       </div>
 
       <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
         <h3 className="text-lg font-semibold text-green-800 dark:text-green-400 mb-2">
-          🎨 Modern UI/UX
+          🎨 Reference Implementation
         </h3>
         <p className="text-green-600 dark:text-green-300">
-          VIMM Frontend provides a modern, intuitive interface that prioritizes user experience 
-          while maintaining the performance needed for live streaming applications.
+          VIMM Frontend demonstrates how to build a complete streaming platform frontend 
+          that integrates with VIMM Core and Chat. Customize and extend for your needs.
         </p>
       </div>
     </div>
